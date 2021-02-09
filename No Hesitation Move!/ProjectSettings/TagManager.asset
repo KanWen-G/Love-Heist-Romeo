@@ -17,10 +17,10 @@ TagManager:
   - Text
   - NPC
   - Background
-  - 
-  - 
-  - 
-  - 
+  - Mask
+  - BehindMask
+  - Black
+  - Objects
   - 
   - 
   - 
@@ -53,9 +53,21 @@ TagManager:
   - name: NPC
     uniqueID: 2749578377
     locked: 0
+  - name: Mask
+    uniqueID: 2189936851
+    locked: 0
+  - name: BehindMask
+    uniqueID: 915836601
+    locked: 0
   - name: 'Player '
     uniqueID: 1025404899
     locked: 0
   - name: Text
     uniqueID: 2394934009
+    locked: 0
+  - name: Black
+    uniqueID: 1713802683
+    locked: 0
+  - name: TOP
+    uniqueID: 2775321915
     locked: 0

@@ -7,32 +7,32 @@ public class FieldOfView : MonoBehaviour
 {
     [SerializeField] private LayerMask layerMask;
     private Mesh mesh;
-    [SerializeField] private float fov = 90f;
-    [SerializeField] private float viewDistance = 50f;
-    private float startingAngle;
+    public float fov;
+    public float viewDistance;
+    private Vector3 origin;
+    public float startingAngle;
 
     private Camera mainCam;
 
     private void Awake()
     {
         mainCam = Camera.main;
-    }
-
-    private void Start()
-    {
+        
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
+        fov = 90f;
+        viewDistance = 50f;
+        origin = Vector3.zero;
     }
 
     private void Update()
     {
-        SetAimDirection(GetMouseWorldPosition() - transform.position.normalized);
+        //SetAimDirection(GetMouseWorldPosition() - transform.position.normalized);
     }
 
     private void LateUpdate()
     {
-        Vector3 origin = Vector3.zero;
-        int rayCount = 50;
+        int rayCount = 200;
         float angle = startingAngle;
         float angleIncrease = fov / rayCount;
 
@@ -74,11 +74,23 @@ public class FieldOfView : MonoBehaviour
         mesh.vertices = vertices;
         mesh.uv = uv;
         mesh.triangles = triangles;
+        mesh.bounds = new Bounds(origin, Vector3.one * 1000f);
     }
 
-    public void SetAimDirection(Vector3 aimDirection)
-    {
+    public void SetOrigin(Vector3 origin) {
+        this.origin = origin;
+    }
+
+    public void SetAimDirection(Vector3 aimDirection) {
         startingAngle = GetAngleFromVectorFloat(aimDirection) + fov / 2f;
+    }
+
+    public void SetFoV(float fov) {
+        this.fov = fov;
+    }
+
+    public void SetViewDistance(float viewDistance) {
+        this.viewDistance = viewDistance;
     }
 
     private Vector3 GetVectorFromAngle(float angle)
